@@ -12,11 +12,14 @@
 - ` docker images` 查看所有镜像
 - cd + 空格 + 目录, 如 ` cd /home/services/mysql`进入指定路径的目录,如这里就是进入mysql目录
 - `cd ..`返回上一级目录，另：注意`cd`和`..`间有空格！
-- `cd` 回到根目录
+- `cd` 回到家目录，root目录
+- `cd /` 回到根目录
+- `pwd` 查看当前完整目录
 - `ls` 查看当前路径下的所有(未隐藏)文件
 - `ls -a`查看当前目录的所有文件，包括隐藏文件
 - `mkdir 目录名`创建一个新目录
 - `mkdir -p 目录名1/目录名2/目录名3` 创建多级目录
+- `vi 文件名` 修改文件内容(如果没有该文件会先创建出来)
 - `rm 文件名` 删除路径下的指定文件,另：在删除前可以先`ls`一下，按照查出来的信息来删，防止删错
 - `rm -r 目录`删除目录
 - `docker ps` 查看容器的信息
@@ -40,7 +43,7 @@
 - 不用再下载docker-compose了，下新的这几个docker版本的时候会把docker compose也一起下了
 
 操作如下：
-1. 创建目录，/home/用户名/services/。services下按应用创建目录，即此次要创建的mysql
+1. mkdir -p /home/yumu/services/mysql 创建目录，/home/用户名/services/mysql。services下按应用创建目录，即此次要创建的mysql
 2. 在mysql下创建docker-compose.yaml文件，另，扩展名可以为yml也可以为yaml， 
 它们都是yaml文件的不同扩展名，极大多数情况下没有什么差别。
    (参考博客：https://blog.csdn.net/Ber_Bai/article/details/119989755  )  
@@ -57,7 +60,8 @@
 10. use schema_xin; 使用创建的数据库
 11. show tables; 查看数据库的数据表
 ![数据表图片](/img/img3.png)
-12. exit 退出数据库
+12. exit; 退出登录
+13. exit; 退出数据库，回到终端命令
   
 
 #### 2024/9/24
