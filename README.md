@@ -51,11 +51,10 @@ ps：
 因为我是通过docker compose脚本创建的，所以要通过docker compose命令来删除：` docker compose down`  
 ![删除成功图片](img/img4.png)  
 删除容器后再删除相应脚本文件：
-- 先进入到脚本存放目录： cd /home/yumu/services/mysql
-- 删除前可以先看一下里面有什么 ls
-- 删除compose脚本 rm docker-compose.yaml
-- 删除数据 rm -r data 一直y加enter就完事儿了
-
+- 先进入到脚本存放目录： `cd /home/yumu/services/mysql`
+- 删除前可以先看一下里面有什么 `ls`
+- 删除compose脚本 `rm docker-compose.yaml`
+- 删除数据 `rm -r data` 一直y加enter就完事儿了
 
 
 部署前准备及须知： 
