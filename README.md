@@ -80,7 +80,7 @@ ps：
 8. `mysql -uroot -p密码` 登录mysql
 9. `show databases;` 查看创建的所有数据表
 10. `use schema_xin;` 使用创建的数据库
-11. `show tables;` 查看数据库的数据表.
+11. `show tables;` 查看数据库的数据表
 ![数据表图片](/img/img3.png)
 12. `exit;` 退出登录
 13. `exit;` 退出数据库，回到终端命令
