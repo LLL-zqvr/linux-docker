@@ -25,6 +25,9 @@
 - `:wq` （文件内操作）（命令模式下）保存修改并退出
 - `rm 文件名` 删除路径下的指定文件,另：在删除前可以先`ls`一下，按照查出来的信息来删，防止删错
 - `rm -r 目录`删除目录
+- `vi /etc/docker/daemon.json` 打开加速地址配置文件
+- `systemctl start docker` 启动docker
+- `service docker restart` 重启docker,多用于修改加速地址配置文件后
 - `docker compose -f docker-compose.yaml up -d` 启动容器
 - `docker ps` 查看容器的信息
 - `docker compose ps` 也是查看容器信息，查出的信息与上一条命令的其实差不多的，就是排列不一样，可以都试试看
@@ -36,12 +39,22 @@
 
 ### ordinary errors
 
-- ` ✘ public-mysql Error Get "https://registry-1.docker.io/v2/": dial tcp:...                     0.0s`  
+1. ` ✘ public-mysql Error Get "https://registry-1.docker.io/v2/": dial tcp:...                     0.0s`  
   解决方法:修改DNS https://blog.csdn.net/weixin_47316183/article/details/131987609
-  
-
+2. `Error response from daemon: Get "https://index.docker.io/v1/search?q=tomcat&n=25": read tcp 10.0.2.15:55872->67.15.100.252:443: read: connection reset by peer`  
+    这是因为很多加速地址都不可用了，可以根据以下网址选取可用加速网址重新配置。 
+   https://blog.csdn.net/llc580231/article/details/139979603#:~:text=%E7%BD%91%E6%98%93%E9%95%9C%E5%83%8F%E4%B8%AD%E5%BF%83%EF%BC%9Ahtt
+   `vi /etc/docker/daemon.json`将可用加速地址加入配置文件中
+   `service docker restart`修改完配置文件记得重启一下docker
 ### Update
 
+#### 2024/9/30
+
+部署tomcat
+操作如下：
+1. `docker search tomcat`先搜索可用的tomcat
+    另：此时可能报错，详情及解决方法看错误2
+2. 
 #### 2024/9/28
 
 把之前的部署mysql的容器，compose脚本都删了，系统地再完成一遍**docker compose部署mysql的过程**。  
