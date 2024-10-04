@@ -8,7 +8,7 @@
 - `sudo -i` 切换成超级管理员
 - `systemctl stop firewalld` 关掉防火墙
 - `systemctl start docker` 启动docker
-- `systemctl status docker` 启动docker
+- `systemctl status docker` 查看docker运行状态
 - ` docker images` 查看所有镜像
 - cd + 空格 + 目录, 如 ` cd /home/services/mysql`进入指定路径的目录,如这里就是进入mysql目录
 - `cd ..`返回上一级目录，另：注意`cd`和`..`间有空格！
@@ -27,7 +27,7 @@
 - `rm -r 目录`删除目录
 - `vi /etc/docker/daemon.json` 打开加速地址配置文件
 - `systemctl start docker` 启动docker
-- `service docker restart` 重启docker,多用于修改加速地址配置文件后
+- `systemctl restart docker` 重启docker,多用于修改加速地址配置文件后
 - `docker compose -f docker-compose.yaml up -d` 启动容器
 - `docker ps` 查看容器的信息
 - `docker compose ps` 也是查看容器信息，查出的信息与上一条命令的其实差不多的，就是排列不一样，可以都试试看
@@ -35,8 +35,11 @@
 - `docker compose ps` 列出项目中的所有容器
 - `docker logs b22`另：b22是我的容器名称 这里是查看容器日志
 - `docker rename 原名称 现名称`修改容器名称，原名称可以通过`docker ps`查询到
+- `docker stop 5a6`停止容器5a6运行
+- `docker rm 5a6` 删除容器，先停止再删除!
 - ` docker compose down` 停止并删除所有容器（包括和容器一起创建出来的相应的网络）
-
+- `docker pull 镜像名:镜像版本号` 拉取镜像,如：`docker pull tomcat:10.1-jdk21`
+- `docker rmi 镜像名:镜像版本号` 删除镜像，如:`docker rmi tomcat:8.5.46-jdk8-openjdk` 
 ### ordinary errors
 
 1. ` ✘ public-mysql Error Get "https://registry-1.docker.io/v2/": dial tcp:...                     0.0s`  
@@ -46,15 +49,31 @@
    https://blog.csdn.net/llc580231/article/details/139979603#:~:text=%E7%BD%91%E6%98%93%E9%95%9C%E5%83%8F%E4%B8%AD%E5%BF%83%EF%BC%9Ahtt
    `vi /etc/docker/daemon.json`将可用加速地址加入配置文件中
    `service docker restart`修改完配置文件记得重启一下docker
+    
 ### Update
 
-#### 2024/9/30
-
-部署tomcat
+#### 2024/9/30 and 2024/10/4
+部署tomcat(主要参考博客：https://cloud.tencent.com/developer/article/2292948#:~:text=%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%8C%96
 操作如下：
 1. `docker search tomcat`先搜索可用的tomcat
     另：此时可能报错，详情及解决方法看错误2
-2. 
+   还是不行，然后，这里有好几个方法：https://cloud.tencent.com/developer/article/2434428
+   亲测法一不行，华为云提供的个人镜像地址已经不可用的了(404 Not Found)。
+   法二的话.....用了点魔法在docker官网注册了账号，但是在虚拟机`docker login`的时候一直被拒绝连接。。。
+   `Error response from daemon: Get "https://registry-1.docker.io/v2/": read tcp 10.0.2.15:40674->202.160.130.145:443: read: connection reset by peer
+[`像这样。。。感觉是因为翻墙之类的所以被拒绝连接，，所以法二也无法探索下去。。
+   法三：照着博主的整，突然发现可以直接搜索tomcat各个版本名称。`https://docker.fxxk.dedyn.io/_/tomcat`
+   这样的话是不是可以指定版本名称直接pull而不用在虚拟机search了呢？
+   ![img6](/img/img6.png)
+2. `docker pull tomcat:10.1-jdk21` 根据操作1的法三，跳过了search的命令，直接在官网查询到合适的版本号，并进行拉取。
+3.  `mkdir -p /home/yumu/services/tomcat ` 创建容器挂载目录
+4.  `chmod -R 777 /home/yumu/services/tomcat/data` 查了一下，这是授予各个权限，使得所有用户都可以读取、修改和执行这个配置文件。感觉不是很安全....
+5. ~~`docker run -d  --name tomcat10.1 --restart always -p 80:8080 -v /services/tomcat/data:/usr/local/tomcat/webapps/ROOT/   tomcat:10.1-jdk21`~~
+6. ~~`docker rename tomcat10.1 5a6`改名~~
+7. 5,6好像是直接用docker命令创建而不是使用脚本创建。为了和老师的一样，把这个新的容器给删了，把tomcat下目录data给删了，像部署mysql一样用配置文件来创建。
+8. `vi tomcat-compose.yaml`把老师给的copy过去，对了要注意修改一下对应镜像等,copy完了记得检查一遍，别缺了哪个字母，特别是第一个字母，如果一开始没有按i键进入插入模式copy时就会缺第一个`s`
+9. `docker compose -f tomcat-compose.yaml up -d  ` 启动容器
+10. `docker rename tomcat-docker-example-1 4ac` 改名改名
 #### 2024/9/28
 
 把之前的部署mysql的容器，compose脚本都删了，系统地再完成一遍**docker compose部署mysql的过程**。  
