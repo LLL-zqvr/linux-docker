@@ -65,7 +65,7 @@
    `Error response from daemon: Get "https://registry-1.docker.io/v2/": read tcp 10.0.2.15:40674->202.160.130.145:443: read: connection reset by peer
 [`像这样。。。感觉是因为翻墙之类的所以被拒绝连接，，所以法二也无法探索下去。。  
 
-   法三：照着博主的整，突然发现可以直接搜索tomcat各个版本名称。`https://docker.fxxk.dedyn.io/_/tomcat`
+   法三：照着博主的整，突然发现可以直接搜索tomcat各个版本名称。https://docker.fxxk.dedyn.io/_/tomcat
    这样的话是不是可以指定版本名称直接pull而不用在虚拟机search了呢？
    ![img6](/img/img6.png)
 2. `docker pull tomcat:10.1-jdk21` 根据操作1的法三，跳过了search的命令，直接在官网查询到合适的版本号，并进行拉取。
@@ -77,6 +77,9 @@
 8. `vi tomcat-compose.yaml`把老师给的copy过去，对了要注意修改一下对应镜像等,copy完了记得检查一遍，别缺了哪个字母，特别是第一个字母，如果一开始没有按i键进入插入模式copy时就会缺第一个`s`
 9. `docker compose -f tomcat-compose.yaml up -d  ` 启动容器
 10. `docker rename tomcat-docker-example-1 4ac` 改名改名
+11. 此时的目录结构为:  
+    ![img7](./img/img7.png)
+12. 
 #### 2024/9/28
 
 把之前的部署mysql的容器，compose脚本都删了，系统地再完成一遍**docker compose部署mysql的过程**。  
