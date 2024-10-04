@@ -53,15 +53,18 @@
 ### Update
 
 #### 2024/9/30 and 2024/10/4
-部署tomcat(主要参考博客：https://cloud.tencent.com/developer/article/2292948#:~:text=%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%8C%96
+部署tomcat(主要参考博客:https://cloud.tencent.com/developer/article/2292948#:~:text=%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%8C%96  
+
 操作如下：
 1. `docker search tomcat`先搜索可用的tomcat
     另：此时可能报错，详情及解决方法看错误2
    还是不行，然后，这里有好几个方法：https://cloud.tencent.com/developer/article/2434428
-   亲测法一不行，华为云提供的个人镜像地址已经不可用的了(404 Not Found)。
+   亲测法一不行，华为云提供的个人镜像地址已经不可用的了(404 Not Found)。  
+
    法二的话.....用了点魔法在docker官网注册了账号，但是在虚拟机`docker login`的时候一直被拒绝连接。。。
    `Error response from daemon: Get "https://registry-1.docker.io/v2/": read tcp 10.0.2.15:40674->202.160.130.145:443: read: connection reset by peer
-[`像这样。。。感觉是因为翻墙之类的所以被拒绝连接，，所以法二也无法探索下去。。
+[`像这样。。。感觉是因为翻墙之类的所以被拒绝连接，，所以法二也无法探索下去。。  
+
    法三：照着博主的整，突然发现可以直接搜索tomcat各个版本名称。`https://docker.fxxk.dedyn.io/_/tomcat`
    这样的话是不是可以指定版本名称直接pull而不用在虚拟机search了呢？
    ![img6](/img/img6.png)
