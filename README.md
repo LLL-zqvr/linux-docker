@@ -79,7 +79,13 @@
 10. `docker rename tomcat-docker-example-1 4ac` 改名改名
 11. 此时的目录结构为:  
     ![img7](./img/img7.png)
-12. 
+12. 唉我去，看漏详细要求了。联系老师之后才发现简略说明前面有详细要求。 
+而且就是用命令行创建的容器(TT)
+    ![img8](./img/img8.png)  
+    就当是尝试、学习用两种方法创建辽。  
+    为了和老师一致，，再删！把容器删掉！
+    ` docker compose -f tomcat-compose.yaml down` 注意怎么创建的要怎么删！
+13. `docker run -d  --name 4ac --restart always -p 80:8080 -v home/yumu/services/tomcat:/home/yumu/services/tomcat/webapps  tomcat:10.1-jdk21` 使用命令创建容器,挂载docker-test-1.0-SNAPSHOT.war所在目录到容器中的部署目录
 #### 2024/9/28
 
 把之前的部署mysql的容器，compose脚本都删了，系统地再完成一遍**docker compose部署mysql的过程**。  
