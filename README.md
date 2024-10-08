@@ -85,7 +85,7 @@
     就当是尝试、学习用两种方法创建辽。  
     为了和老师一致，，再删！把容器删掉！
     ` docker compose -f tomcat-compose.yaml down` 注意怎么创建的要怎么删！
-13. `docker run -d  --name 4ac --restart always -p 80:8080 -v home/yumu/services/tomcat:/home/yumu/services/tomcat/webapps  tomcat:10.1-jdk21` 使用命令创建容器,挂载docker-test-1.0-SNAPSHOT.war所在目录到容器中的部署目录
+13. `docker run -d  --name 4ac --restart always -p 80:8080 -v home/yumu/services/tomcat/webapps:/home/yumu/services/tomcat  tomcat:10.1-jdk21` 使用命令创建容器,挂载docker-test-1.0-SNAPSHOT.war所在目录到容器中的部署目录
 #### 2024/9/28
 
 把之前的部署mysql的容器，compose脚本都删了，系统地再完成一遍**docker compose部署mysql的过程**。  
@@ -93,7 +93,7 @@ ps：
 怎么创建的就要怎么删！如果是用docker创建的就用docker命令删除；如果是用docker compose命令或者脚本文件创建的就要用docker compose命令来删除！
 假设是用docker compose创建但是是用docker命令删除就会删不干净当时同时创建的网络，会影响后面容器的创建！  
 因为我是通过docker compose脚本创建的，所以要通过docker compose命令来删除：` docker compose down`  
-![删除成功图片](img/img4.png)  
+![删除成功图片](img/img4.png) 
 删除容器后再删除相应脚本文件：
 - 先进入到脚本存放目录： `cd /home/yumu/services/mysql`
 - 删除前可以先看一下里面有什么 `ls`
