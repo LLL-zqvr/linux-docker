@@ -37,7 +37,8 @@
 - `docker rename 原名称 现名称`修改容器名称，原名称可以通过`docker ps`查询到
 - `docker stop 5a6`停止容器5a6运行
 - `docker rm 5a6` 删除容器，先停止再删除!
-- ` docker compose down` 停止并删除所有容器（包括和容器一起创建出来的相应的网络）
+- ` docker compose down -v` 停止并删除所有容器（包括和容器一起创建出来的相应的网络）,加上-v则可以删除同时创建出来的数据卷
+- ` docker compose -f tomcat-compose.yaml down -v` 停止并删除指定容器和创建出的数据卷
 - `docker pull 镜像名:镜像版本号` 拉取镜像,如：`docker pull tomcat:10.1-jdk21`
 - `docker rmi 镜像名:镜像版本号` 删除镜像，如:`docker rmi tomcat:8.5.46-jdk8-openjdk` 
 ### ordinary errors
@@ -70,22 +71,26 @@
    ![img6](/img/img6.png)
 2. `docker pull tomcat:10.1-jdk21` 根据操作1的法三，跳过了search的命令，直接在官网查询到合适的版本号，并进行拉取。
 3.  `mkdir -p /home/yumu/services/tomcat ` 创建容器挂载目录
-4.  `chmod -R 777 /home/yumu/services/tomcat/data` 查了一下，这是授予各个权限，使得所有用户都可以读取、修改和执行这个配置文件。感觉不是很安全....
-5. ~~`docker run -d  --name tomcat10.1 --restart always -p 80:8080 -v /services/tomcat/data:/usr/local/tomcat/webapps/ROOT/   tomcat:10.1-jdk21`~~
+4.  ~~`chmod -R 777 /home/yumu/services/tomcat/data` 查了一下，这是授予各个权限，使得所有用户都可以读取、修改和执行这个配置文件。感觉不是很安全....~~
+5. ~~`docker run -d  --name 4ac --restart always -p 80:8080 -v home/yumu/services/tomcat/webapps:/home/yumu/services/tomcat  tomcat:10.1-jdk21` 使用命令创建容器,挂载docker-test-1.0-SNAPSHOT.war所在目录到容器中的部署目录~~
+   啊哈，错了错了，挂载的后半截目录写错了，那个是虚拟机工作目录，是固定的，不是自己能规定的。要把后半段给改了，因为还是要脚本创建容器，所以就不再深究docker命令创建。
+    ~~`docker run -d  --name tomcat10.1 --restart always -p 80:8080 -v /services/tomcat/webapps:/usr/local/tomcat/webapps/ROOT/   tomcat:10.1-jdk21`~~
 6. ~~`docker rename tomcat10.1 5a6`改名~~
-7. 5,6好像是直接用docker命令创建而不是使用脚本创建。为了和老师的一样，把这个新的容器给删了，把tomcat下目录data给删了，像部署mysql一样用配置文件来创建。
+7. 5,6是直接用docker命令创建而不是使用脚本创建。为了和老师的一样，把这个新的容器给删了，把tomcat下目录data给删了，像部署mysql一样用配置文件来创建。
 8. `vi tomcat-compose.yaml`把老师给的copy过去，对了要注意修改一下对应镜像等,copy完了记得检查一遍，别缺了哪个字母，特别是第一个字母，如果一开始没有按i键进入插入模式copy时就会缺第一个`s`
 9. `docker compose -f tomcat-compose.yaml up -d  ` 启动容器
 10. `docker rename tomcat-docker-example-1 4ac` 改名改名
 11. 此时的目录结构为:  
     ![img7](./img/img7.png)
-12. 唉我去，看漏详细要求了。联系老师之后才发现简略说明前面有详细要求。 
-而且就是用命令行创建的容器(TT)
-    ![img8](./img/img8.png)  
-    就当是尝试、学习用两种方法创建辽。  
-    为了和老师一致，，再删！把容器删掉！
-    ` docker compose -f tomcat-compose.yaml down` 注意怎么创建的要怎么删！
-13. `docker run -d  --name 4ac --restart always -p 80:8080 -v home/yumu/services/tomcat/webapps:/home/yumu/services/tomcat  tomcat:10.1-jdk21` 使用命令创建容器,挂载docker-test-1.0-SNAPSHOT.war所在目录到容器中的部署目录
+12. 将打包好的war文件放入webapps中，war文件会自动解压。再在浏览器访问：`http://localhost:18080/1/`
+    这里的`18080`是映射转发的主机的端口,1是解压后的文件的名称(访问的就是1文件中的index.html)。  
+    ![img11](/img/img11.png)  
+    这里写一下端口们的关系，怕后面忘了：
+    先是主机的18080端口映射centos的80端口  
+    ![img9](/img/img9.png)  
+    然后centos的80端口映射到容器的8080端口（8080端口是默认的tomcat端口，是不可被更改的）  
+    ![img10](/img/img10.png)
+    
 #### 2024/9/28
 
 把之前的部署mysql的容器，compose脚本都删了，系统地再完成一遍**docker compose部署mysql的过程**。  
