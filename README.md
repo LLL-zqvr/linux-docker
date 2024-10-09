@@ -82,9 +82,10 @@
 10. `docker rename tomcat-docker-example-1 4ac` 改名改名
 11. 此时的目录结构为:  
     ![img7](./img/img7.png)
-12. 将打包好的war文件放入webapps中，war文件会自动解压。再在浏览器访问：`http://localhost:18080/1/`
-    这里的`18080`是映射转发的主机的端口,1是解压后的文件的名称(访问的就是1文件中的index.html)。  
-    ![img11](/img/img11.png)  
+12. 将打包好的war文件放入webapps中，war文件会自动解压。  
+    ![img11](/img/img11.png)
+13. 再在浏览器访问：`http://localhost:18080/1/`
+    这里的`18080`是映射转发的主机的端口,1是解压后的文件的名称(访问的就是1文件中的index.html)。
     这里写一下端口们的关系，怕后面忘了：
     先是主机的18080端口映射centos的80端口  
     ![img9](/img/img9.png)  
