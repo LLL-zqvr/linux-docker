@@ -78,7 +78,7 @@
 6. ~~`docker rename tomcat10.1 5a6`改名~~
 7. 5,6是直接用docker命令创建而不是使用脚本创建。为了和老师的一样，把这个新的容器给删了，把tomcat下目录data给删了，像部署mysql一样用配置文件来创建。
 8. `vi tomcat-compose.yaml`把老师给的copy过去，对了要注意修改一下对应镜像等,copy完了记得检查一遍，别缺了哪个字母，特别是第一个字母，如果一开始没有按i键进入插入模式copy时就会缺第一个`s`
-9. `docker compose -f tomcat-compose.yaml up -d  ` 启动容器
+9. `docker compose -f docker-compose.yaml up -d  ` 启动容器
 10. `docker rename tomcat-docker-example-1 4ac` 改名改名
 11. 此时的目录结构为:  
     ![img7](./img/img7.png)
