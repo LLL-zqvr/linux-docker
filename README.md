@@ -25,6 +25,7 @@
 - `:wq` （文件内操作）（命令模式下）保存修改并退出
 - `rm 文件名` 删除路径下的指定文件,另：在删除前可以先`ls`一下，按照查出来的信息来删，防止删错
 - `rm -r 目录`删除目录
+- `rm -rf 文件夹` 删除文件夹及里面的所有数据
 - `vi /etc/docker/daemon.json` 打开加速地址配置文件
 - `systemctl start docker` 启动docker
 - `systemctl restart docker` 重启docker,多用于修改加速地址配置文件后
