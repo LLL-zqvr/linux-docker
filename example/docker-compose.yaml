@@ -6,7 +6,7 @@ services:
       - ./data/:/var/lib/mysql/
     environment:
       TZ: Asia/Shanghai
-      MYSQL_ROOT_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: bhyh9376
     command:
       --max_connections=2500
     ports:
