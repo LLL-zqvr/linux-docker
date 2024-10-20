@@ -59,6 +59,8 @@
 部署myTest项目，里面有mysql和tomcat
 目录结构如下：
 !(img13)[]
+mysql:a5n
+tomcat:cx1
 
 #### 2024/9/30 and 2024/10/4
 部署tomcat(主要参考博客:https://cloud.tencent.com/developer/article/2292948#:~:text=%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%8C%96  
