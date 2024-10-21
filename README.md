@@ -51,16 +51,19 @@
    https://blog.csdn.net/llc580231/article/details/139979603#:~:text=%E7%BD%91%E6%98%93%E9%95%9C%E5%83%8F%E4%B8%AD%E5%BF%83%EF%BC%9Ahtt
    `vi /etc/docker/daemon.json`将可用加速地址加入配置文件中
    `service docker restart`修改完配置文件记得重启一下docker
+3. 配置.yaml文件时，报错： `(root) Additional property 　  volumes is not allowed`说是字段不允许，但可能还是格式错误的锅。
+   在idea中建立文件粘贴代码即可解决问题。
     
 ### Update
 
-#### 2024/10/14
+#### 2024/10/14 and 2024/10/21
 
-部署myTest项目，里面有mysql和tomcat
-目录结构如下：
-!(img13)[]
-mysql:a5n
-tomcat:cx1
+部署myTest。感触最深的就是yaml文件的规范格式。空格不对都无法通过。其有着严格的要求。  
+网站 https://www.yamllint.com/ 可以用来查询代码格式是否正确。
+用完之后还是报错，最后发现idea更加方便，在idea中真正检测出错误原因。
+
+http://127.0.0.1:18080/WebObject-Software_website-1.0-SNAPSHOT/index
+
 
 #### 2024/9/30 and 2024/10/4
 部署tomcat(主要参考博客:https://cloud.tencent.com/developer/article/2292948#:~:text=%E7%AE%80%E5%8C%96%E9%83%A8%E7%BD%B2%EF%BC%9A%E9%80%9A%E8%BF%87%E5%AE%B9%E5%99%A8%E5%8C%96  
@@ -115,7 +118,7 @@ ps：
 - 先进入到脚本存放目录： `cd /home/yumu/services/mysql`
 - 删除前可以先看一下里面有什么 `ls`
 - 删除compose脚本 `rm docker-compose.yaml`
-- 删除数据 `rm -r data` 一直y加enter就完事儿了
+- 删除所有数据（不可逆，所以一定要再三确认！） `rm -rf data` 
 
 
 部署前准备及须知： 
