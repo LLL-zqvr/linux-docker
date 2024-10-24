@@ -58,11 +58,14 @@
 
 #### 2024/10/14 and 2024/10/21
 
-部署myTest。感触最深的就是yaml文件的规范格式。空格不对都无法通过。其有着严格的要求。  
+部署myTest。要注意yaml文件的规范格式。空格不对都无法通过。其有着严格的要求。  
 网站 https://www.yamllint.com/ 可以用来查询代码格式是否正确。
 用完之后还是报错，最后发现idea更加方便，在idea中真正检测出错误原因。
-
-http://127.0.0.1:18080/WebObject-Software_website-1.0-SNAPSHOT/index
+过程同以前部署mysql，省略.
+需要注意的是，项目的centext.xml中的url为：`url="jdbc:mysql://mysql:3306/2022222994" />`，`20222222994`为数据库名。
+运行容器：`docker compose -f docker-compose.yaml up -d`
+最后访问：
+`http://127.0.0.1:18080/WebObject-Software_website-1.0-SNAPSHOT/index`
 
 
 #### 2024/9/30 and 2024/10/4
