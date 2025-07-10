@@ -56,6 +56,34 @@
     
 ### Update
 
+#### 2025/7/9
+写在前头：我勒个豆，时间过得好快啊.....现在大模型太火了，趁现在没啥实习任务，用docker玩一下大模型本地部署吧。
+注：与之前的项目部署无关。这次用到的只是docker。使用docker部署ollama
+1. 下载docker镜像`docker pull ollama/ollama`
+![alt text](img/img14.png)
+2. o神，启动！
+```
+docker run -d \                                             3m 58s 19:00:29
+  --name ollama \
+  -p 11434:11434 \
+  -v ollama:/root/.ollama \
+  ollama/ollama
+```
+![alt text](img/img15.png)
+3. 验证，很好很好，成功了
+![alt text](img/img16.png)
+4. 浅下一个模型玩玩
+```
+curl -X POST http://localhost:11434/api/pull -d '{"name": "llama3"}'
+```
+5. 66g+，就很大
+![alt text](img/img17.png)
+6. 装错了，我哭死
+卸载：
+先进入ollma容器：` docker exec -it ollama /bin/bash `
+然后查看：`ollama list`
+然后：`ollama rm llama3`
+下正确的：
 #### 2024/10/14 and 2024/10/21
 
 部署myTest。要注意yaml文件的规范格式。空格不对都无法通过。其有着严格的要求。  
